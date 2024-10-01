@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 // Define Macdonaldz Theme colors
 class AppThemes {
   static final lightTheme = ThemeData(
+    
+    fontFamily: 'Quicksand',  // FontFamily is set globally
+
     brightness: Brightness.light,
-    primaryColor: Colors.red,          // Red as primary color
+    primaryColor: Colors.red,              // Red as primary color
     scaffoldBackgroundColor: Colors.white, // Background for Scaffold
 
     colorScheme: const ColorScheme.light(
@@ -47,6 +50,8 @@ class AppThemes {
   );
 
   static final darkTheme = ThemeData(
+    fontFamily: 'Quicksand',  // FontFamily set for dark theme as well
+    
     brightness: Brightness.dark,
     primaryColor: Colors.red,
     scaffoldBackgroundColor: Colors.black, // Background for Scaffold

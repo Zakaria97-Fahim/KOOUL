@@ -17,8 +17,18 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/Logomark1.png  
+    - assets/images/salad1.png  
+    - assets/images/pizza-slice1.png  
+    - assets/images/ice-cream1.png  
+    - assets/images/hotdog1.png  
+    - assets/images/burger-lettuce1.png  
+    - assets/images/Logomark.png  
+    - assets/images/BackgroundAnimation.png
+    - assets/images/question.png  
   fonts:
-    - family: Quicksand-Bold
+    - family: Quicksand-Bolds
       fonts:
         - asset: assets/fonts/Quicksand-Bold.ttf
     - family: Quicksand-Light
