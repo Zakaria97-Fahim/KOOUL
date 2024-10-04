@@ -7,13 +7,14 @@ class AppThemes {
     fontFamily: 'Quicksand',  // FontFamily is set globally
 
     brightness: Brightness.light,
-    primaryColor: Colors.red,              // Red as primary color
+    
+    primaryColor: Colors.red,  // Red as primary color
     scaffoldBackgroundColor: Colors.white, // Background for Scaffold
-
+    
     colorScheme: const ColorScheme.light(
-      primary: Colors.red,              // Primary color (Red)
-      secondary: Colors.yellow,         // Secondary/Accent color (Yellow)
-      surface: Colors.white,            // Surface color (White for light theme)
+      primary: Colors.red,              // Primary color in dark mode
+      secondary: Colors.yellow,         // Secondary/Accent color in dark mode
+      surface: Colors.white,            // Surface color
     ),
     
     textTheme: const TextTheme(
@@ -35,14 +36,13 @@ class AppThemes {
       labelLarge: TextStyle(
         color: Colors.black,           // Button text in black (equivalent to button)
         fontSize: 16,
-        fontWeight: FontWeight.bold,   // Bold button text
+        fontWeight: FontWeight.bold,     // Bold button text
       ),
       bodySmall: TextStyle(
         color: Colors.grey,            // Hint text grey (equivalent to subtitle1)
         fontSize: 14,
       ),
-    ),
-    
+    ),    
     buttonTheme: const ButtonThemeData(
       buttonColor: Colors.red,         // Red background for buttons
       textTheme: ButtonTextTheme.primary,

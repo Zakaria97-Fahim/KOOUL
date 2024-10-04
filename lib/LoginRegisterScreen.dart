@@ -1,22 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_name/RTLText.dart';
-import 'themes/theme.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: AppThemes.lightTheme,
-      home: const LoginRegister(),
-    );
-  }
-}
+import 'package:project_name/RTLText.dart';  // Importing custom RTL text handling class
+import 'themes/theme.dart';  // Importing the app's theme
 
 class LoginRegister extends StatefulWidget {
   const LoginRegister({super.key});
@@ -26,109 +10,128 @@ class LoginRegister extends StatefulWidget {
 
 class _LoginState extends State<LoginRegister> {
 
-
-  // var to hide the password Text
+  // Variable to toggle password visibility
   bool _obscureText = true;
   
-  // var to check if the Pass TF is empty
-  final _passwordController = TextEditingController();
+  // Not yet used
+  // Text editing controller to capture the input in the password field
+  // final _passwordController = TextEditingController();
   
-  // focus on Passwrod TF when it is empty
-  var _focusNode = FocusNode(); 
+  // Not yet used
+  // Focus node to manage focus on the password field
+  // var _focusNode = FocusNode(); 
 
   @override
   Widget build(BuildContext context) {
-    return RTLPage( // class RTL for Arabic text
-      child:Scaffold(       
-        
+    return RTLPage(  // Custom class RTLPage ensures right-to-left (RTL) layout for Arabic text
+      
+      child: Scaffold(       
+        /* AppBar section: 
+            - created to avoid using arrow Back Icon.
+            - Arrow Back Icon will created Automatically because of Navigator.of().psuNamed()   
+        */
         appBar: AppBar(
-          toolbarHeight: 80.0, // Height of AppBar
+          toolbarHeight: 80.0,  // Sets the height of the AppBar
           actions: [
             Padding( 
-              padding: const EdgeInsets.only(left: 10.0), 
-              child: MaterialButton(   // Arabic Button
-                onPressed: (){},
-                child: Text("العربية"),
+              padding: const EdgeInsets.only(left: 10.0), // Adding padding to the left of the button
+              child: MaterialButton(                      // Button to switch the language to Arabic
+                onPressed: (){},                          // Empty onPressed handler for now
+                child: Text("العربية"),                  // Button text in Arabic
                 shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.black, width: 0.5), // Black thin border
-                  borderRadius: BorderRadius.circular(30)
+                  side: BorderSide(color: Colors.black, width: 0.5),
+                  borderRadius: BorderRadius.circular(30)  
                 ),
               ),
             ),  
           ]
         ),
 
-        body: Padding(                        // to have 15px space from all sides of the body
-          padding: const EdgeInsets.all(15.0), 
+        // Body section
+        body: Padding( 
+          padding: const EdgeInsets.all(15.0),  // Padding to ensure 15px of space around all sides of the content
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start, // start the widget from RTL
+            mainAxisAlignment: MainAxisAlignment.spaceAround,  // Distributes space evenly between widgets and the borders
+            crossAxisAlignment: CrossAxisAlignment.start,  // Aligns all widgets to start from the right in RTL layout
             children: [
-              Text("تسجيل أو دخول", style: TextStyle(fontSize: 30.0, fontWeight:FontWeight.w900),),
-              Text("دير النية و كتب نمرتك هنا"),
-              // Phone Text
+              // Header text
+              Text("تسجيل أو دخول", style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w900)),  // Bold Arabic text
+              Text("دير النية و كتب نمرتك هنا"),  // Instructional text in Arabic
+
+              // Phone number input field
               TextField( 
                 decoration: InputDecoration(
-                  hintText: "رقم الهاتف",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  labelText:"رقم الهاتف",
+                  hintText: "رقم الهاتف",  
+                  hintStyle: TextStyle(color: Colors.grey),  
+                  labelText: "رقم الهاتف",  
                   labelStyle: TextStyle(color: Colors.black),
-                  contentPadding: EdgeInsets.only(left: 30.0), // move Textlabel 30px from R to L
-                  prefixIcon: Icon(Icons.phone_android_outlined),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(40))
+                  contentPadding: EdgeInsets.only(left: 30.0),  // Adds padding to the left to shift the labelText
+                  prefixIcon: Icon(Icons.phone_android_outlined),  
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(40))  // Rounded borders with a radius of 40
                 ),
               ),
-              // Password Text
+
+              // Password input field
               TextField(
-                controller: _passwordController, // get the content of the text
-                focusNode: _focusNode,           // focus on Passwrod TF when it is empty
-                obscureText: _obscureText,       // hide the password Text
-                onChanged: (text) {},// ?
+                // controller: _passwordController,  // Controller to capture the password input
+                // focusNode: _focusNode,  // Focus node to manage focus
+                obscureText: _obscureText,  // Toggles password visibility
                 decoration: InputDecoration(
-                  hintText: "كلمة المرور",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  labelText:"كلمة المرور",
-                  labelStyle: TextStyle(color: Colors.black),
-                  prefixIcon: Icon(Icons.lock_outline, color: Colors.black),
-                  suffixIcon: IconButton(
+                  hintText: "كلمة المرور",  
+                  hintStyle: TextStyle(color: Colors.grey), 
+                  labelText: "كلمة المرور",  
+                  labelStyle: TextStyle(color: Colors.black),  
+                  contentPadding: EdgeInsets.only(left: 30.0),  // Adds padding to the left of the labelText
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(40)),
+                  prefixIcon: Icon(Icons.lock_outline, color: Colors.black),  
+                  suffixIcon: IconButton(  
+                    // Eye icon to toggle password visibility
                     icon: Icon(
-                      _obscureText ? Icons.visibility_off : Icons.visibility,
+                      _obscureText ? Icons.visibility_off : Icons.visibility,  // Shows visibility icon based on _obscureText
                       color: Colors.black,
                     ),
                     onPressed: () {
                       setState(() {
-                        _obscureText = !_obscureText;
+                        _obscureText = !_obscureText;  // Toggles the password visibility
                       });
                     },
                   ),
-                  contentPadding: EdgeInsets.only(left: 30.0), // move Textlabel 30px from R to L
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                  
                 ),
               ),
+
+              // Forgot password row
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,  // Centers the icon and text in the row
                 children: [
-                  IconButton(onPressed: (){}, icon: Image.asset("assets/images/question.png")),
-                  Text("نسيت كلمة المرور"),
+                  IconButton(
+                    onPressed: (){},  // Placeholder for the forgot password action
+                    icon: Image.asset("assets/images/question.png")  // Icon image for the forgot password button
+                  ),
+                  Text("نسيت كلمة المرور"),  // Text in Arabic meaning "Forgot Password"
                 ],
               ),
-              SizedBox(height: 100.0,),
-              MaterialButton(onPressed: (){},
-                child: Text("تسجيل"),
-                color: const Color.fromARGB(1, 234, 234, 241),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                minWidth: 360.0,
-                height: 60.0,
+
+              // Spacer to add 100px vertical space
+              SizedBox(height: 100.0),
+
+              // Register button
+              MaterialButton(
+                onPressed: (){},  
+                child: Text("تسجيل"),  
+                color: const Color.fromARGB(1, 234, 234, 241),  // Button background color
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),  // Rounded button with 40px radius
+                minWidth: 360.0,  // Minimum width of the button
+                height: 60.0,  // Height of the button
               ),
-              MaterialButton(onPressed: (){},
-                child: Text("دخول"),
-                color: AppThemes.lightTheme.primaryColor,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                minWidth: 360.0,
-                height: 60.0,
+
+              // Login button
+              MaterialButton(
+                onPressed: (){}, 
+                child: Text("دخول"),  
+                color: AppThemes.lightTheme.primaryColor,  // Button background color from the app theme
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),  
+                minWidth: 360.0,  
+                height: 60.0,  
               ),
             ],
           ),
@@ -136,4 +139,4 @@ class _LoginState extends State<LoginRegister> {
       )
     );
   }
-}    
+}
