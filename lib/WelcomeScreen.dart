@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'themes/theme.dart';
+import 'themes/theme.dart'; 
+import 'widgets/backgroundPatternWidget.dart'; // Import the BackgroundPatternWidget
+import 'widgets/iconWidget.dart'; // Import the iconWidget
+import 'widgets/verticalTextWidget.dart'; // Import the verticalTextWidget 
+import 'widgets/customButton.dart'; // Import ButtonWidget
+
 
 
 class WelcomeScreen extends StatefulWidget {
@@ -23,117 +28,101 @@ class _WelcomeScreenState extends State<WelcomeScreen>{
       */
       body: Stack(
         children: [  
-        Image.asset("assets/images/BackgroundAnimation.png"), // the Background Image
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround, 
-          children: [
-            /* Row widget:
-              * - Aligns its children horizontally (icons on one side, text on the other).
-              * - mainAxisAlignment.spaceBetween puts space between the left (icons) and right (text) parts.
-              * - crossAxisAlignment.end aligns the icons at the bottom.
-            */
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                /* Icons column:
-                  * - Contains several IconButtons stacked vertically.
-                  * - Each button has a different icon (logomark, hotdog, etc.).
-                    * - Each button displays an image and is clickable.
-                    * - Currently, they have empty onPressed handlers.
-                */
-                Column(
+          BackgroundPatternWidget(
+            patternType: 'BackgroundAnimation.png', 
+            opacity: 1, 
+            backgroundColor: AppThemes.lightTheme.primaryColor,),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround, 
+            children: [
+              /* Container used to have horizontal padding
+              * Row widget:
+                * - Aligns its children horizontally (icons on one side, text on the other).
+                * - mainAxisAlignment.spaceBetween puts space between the left (icons) and right (text) parts.
+                * - crossAxisAlignment.end aligns the icons at the bottom.
+              */
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(
-                      icon:Image.asset('assets/images/Logomark1.png'),
-                      onPressed: () {},
+                    /* Icons column:
+                      * - Contains several IconButtons stacked vertically.
+                      * - Each has a different icon (logomark, hotdog, etc.).
+                        * - Each icon displays an image and is clickable.
+                        * - Currently, they have empty onPressed handlers.
+                    */
+                    const Column(
+                      children: [
+                        IconWidget(imagePath: 'assets/images/Logomark1.png', ),
+                        SizedBox(height: 16), // Spacing between icons
+                        IconWidget(imagePath: 'assets/images/hotdog1.png', ),
+                        SizedBox(height: 16),
+                        IconWidget(imagePath: 'assets/images/burger-lettuce1.png', ),
+                        SizedBox(height: 16),
+                        IconWidget(imagePath: 'assets/images/ice-cream1.png', ),
+                        SizedBox(height: 16),
+                        IconWidget(imagePath: 'assets/images/salad1.png', ),
+                        SizedBox(height: 16),
+                        IconWidget(imagePath: 'assets/images/pizza-slice1.png',),
+                      ],
                     ),
-                    IconButton(
-                      icon:Image.asset('assets/images/hotdog1.png'),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon:Image.asset('assets/images/burger-lettuce1.png'),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon:Image.asset('assets/images/ice-cream1.png'),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon:Image.asset('assets/images/salad1.png'),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon:Image.asset('assets/images/pizza-slice1.png'),
-                      onPressed: () {},
-                    ),
+
+                    /* RotatedBox widget:
+                        * - Rotates the Text widget by -90 degrees 
+                        * - Text widget:
+                          * - Displays the text "KoouL." in a large, bold font.
+                          * - The font size is 85.0, using the custom Quicksand-Bold font.
+                    */
+                    VerticalTextWidget(
+                      text: 'KoouL.', 
+                      fontSize: 70.0, 
+                      color: AppThemes.lightTheme.colorScheme.surface,
+                    )
                   ],
                 ),
-                /* RotatedBox widget:
-                    * - Rotates the Text widget by -90 degrees 
-                    * Text widget:
-                      * - Displays the text "KoouL." in a large, bold font.
-                      * - The font size is 85.0, using the custom Quicksand-Bold font.
-                */
-                RotatedBox(
-                    quarterTurns: -1,
-                    child: Text('KoouL.', 
-                      style: TextStyle(
-                        fontFamily: 'Quicksand-Bold',
-                        fontSize: 85.0, 
-                        color: AppThemes.lightTheme.colorScheme.surface),
-                    ),
-                ),
-              ],
-            ),
-            SizedBox(height: 100),
-            /*
-              * SizedBox widget:
-                * - Adds vertical spacing of 100 between the Row and the next column.
-              
+              ),
+              SizedBox(height: 100),
+              /*
+                * SizedBox widget:
+                  * - Adds vertical spacing of 100 between the Row and the next column.
                 * Buttons Column :
-                  *- Contains two MaterialButton widgets stacked vertically.
-                  *- Aligns the buttons with equal spacing.
-
-              * First button: Login with phone number
-                     *- Text is in Arabic, displayed on the button.
-                     *- onPressed handler:
-                        - When pressed, navigates to the "login" route.
-              * Second button: Login with Google
-                     * - Text is in Arabic, displayed on the button.
-                            
-              * Buttons styling:
-                     *- Uses a rounded rectangular shape with a radius of 50.0.
-                     *- The button has a custom background color.
-            */
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                MaterialButton(
-                  child: Text("دخول برقم الهاتف"),
-                  onPressed:(){
-                    Navigator.of(context).pushNamed("login");
-                  }, 
-                  color: Color.fromARGB(1,51,51,77),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                  minWidth: 360.0,
-                  height: 60.0,
-                ),
-                SizedBox(height: 10,),
-                MaterialButton(
-                  child: Text("Google دخول بحساب"),   
-                  onPressed:(){},
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                  minWidth: 360.0,
-                  height: 60.0,
-                )
-              ],
-            )
-          ],
-        ),
-      ]
+                    *- Contains two MaterialButton widgets stacked vertically.
+                    *- Aligns the buttons with equal spacing.
+                * First button: Login with phone number
+                      *- Text is in Arabic, displayed on the button.
+                      *- onPressed handler:
+                          - When pressed, navigates to the "login" route.
+                * Second button: Login with Google
+                      * - Text is in Arabic, displayed on the button.                              
+                * Buttons styling:
+                      *- Uses a rounded rectangular shape with a radius of 40.0.
+                      *- The button has a custom background color.
+              */
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomButton(
+                    label: "دخول برقم الهاتف", 
+                    onPressed: (){
+                      Navigator.of(context).pushNamed("login");
+                    }, 
+                    backColor: Color.fromARGB(1,51,51,77),
+                    textColor: AppThemes.lightTheme.scaffoldBackgroundColor,
+                  ),
+                  SizedBox(height: 10,),
+                  CustomButton(
+                    label: "Google دخول بحساب", 
+                    onPressed: (){
+                      Navigator.of(context).pushNamed("login");
+                    }, 
+                    backColor: AppThemes.lightTheme.scaffoldBackgroundColor,
+                  ),  
+                ],
+              )
+            ],
+          ),
+        ]
       )        
     );
   }

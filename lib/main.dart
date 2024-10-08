@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'themes/theme.dart';
-import 'RTLText.dart';
+import 'language/RTLText.dart';
 import 'welcomeScreen.dart';
-import 'LoginRegisterScreen.dart';
+import 'loginRegisterScreen.dart';
+import 'registration.dart';
 /*
  *-import 'themes/theme.dart'; 
     These settings will apply a consistent look (lightTheme) across the entire app.
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "intro": (context) => const WelcomeScreen(),
         "login": (context) => const LoginRegister(),
+        "registration": (context) => const Registration(),
       },
       /* Routes:
         * provides route management for navigation between screens.

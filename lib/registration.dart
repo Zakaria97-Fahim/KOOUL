@@ -9,13 +9,13 @@ import 'widgets/iconWidget.dart';
 import 'widgets/headerWidget.dart';
 import 'widgets/customTextField.dart';
 
-class LoginRegister extends StatefulWidget {
-  const LoginRegister({super.key});
+class Registration extends StatefulWidget {
+  const Registration({super.key});
   @override
-  _LoginState createState() => _LoginState();
+  _RegistrationState createState() => _RegistrationState();
 }
 
-class _LoginState extends State<LoginRegister> {
+class _RegistrationState extends State<Registration> {
 
   // If Arabic the chosen language 
   bool isArabic = true;
@@ -23,7 +23,6 @@ class _LoginState extends State<LoginRegister> {
   // Hide Password at TextField
   bool _obscureText= true ;
   
-
   // get the Textfield content
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -38,6 +37,7 @@ class _LoginState extends State<LoginRegister> {
     }
     return null;
   }
+
   // Function to validate the password
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
@@ -49,43 +49,18 @@ class _LoginState extends State<LoginRegister> {
     return null;
   }
 
-  // Function triggered when Link "Forgot Password" is clicked
-  void _onForgotPassword() {
-    // You can navigate to a "Forgot Password" page or show a dialog (optional) here
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Forgot Password'),
-          content: Text('You will be redirected to reset your password.'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();  // Close the dialog
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   // Function triggered when the login button is pressed
-  void _onLogin() {
+  void _onRegister() {
     // Get the phone number and password without leading/trailing spaces
     var phoneNumber = _phoneController.text.trim();
-    var password = _passwordController.text.trim();
-    
+    var password = _passwordController.text.trim(); 
     // Validate the phone number and password
     var phoneValidationResult = _validatePhoneNumber(phoneNumber);
     var passwordValidationResult = _validatePassword(password);
-    
     // Check if both validations passed
     if (phoneValidationResult == null && passwordValidationResult == null) {
-      // If all inputs are valid, proceed with login
-      print("Login successful");
-      // Add additional login logic here (e.g., API call)
+      // If all inputs are valid, proceed with Register
+      print("Register successful");
     } else {
       // Handle validation errors
       if (phoneValidationResult != null) {
@@ -96,7 +71,6 @@ class _LoginState extends State<LoginRegister> {
       }
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +114,7 @@ class _LoginState extends State<LoginRegister> {
              
               // Header (Title and Subtitle)
               HeaderWidget(
-                title: isArabic ? 'تسجيل أو دخول' :'Register or Login',
+                title: isArabic ? 'تسجيل' :'Register',
                 subtitle: isArabic ?'دير النية و كتب نمرتك هنا' :'Have faith and enter your Number here',
                 textAlign: TextAlign.start,
               ),
@@ -153,6 +127,21 @@ class _LoginState extends State<LoginRegister> {
                 text: _phoneController,
               ),
 
+              // Email input field
+              CustomTextField(
+                labelText: isArabic ? 'البريد الالكتروني' : 'Email',
+                hintText: isArabic ? 'البريد الالكتروني' : 'Email',
+                icon: Icons.alternate_email,
+                text: _phoneController,
+              ),
+
+              // Full Name input field
+              CustomTextField(
+                labelText: isArabic ? 'الاسم الكامل' : 'Full Name',
+                hintText: isArabic ?  'الاسم الكامل' : 'Full Name',
+                icon: Icons.person_outline,
+                text: _phoneController,
+              ),
               // Password input field
               CustomTextField(
                 labelText: isArabic ? 'كلمة المرور' : 'Password',
@@ -172,27 +161,7 @@ class _LoginState extends State<LoginRegister> {
                 obscureText: _obscureText,
                 text: _passwordController,  
               ), 
-
-              // Forgot Password Row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,  // Centers the icon and text in the row
-                children: [
-
-                  // Icon question mark 
-                  IconButton(
-                    onPressed: (){},  // Placeholder for the forgot password action
-                    icon: Image.asset("assets/images/question.png")  // Icon image for the forgot password button
-                  ),
-                  // Link for the forgot Password
-                  GestureDetector(
-                    onTap: () {
-                      _onForgotPassword();
-                    },
-                    child: Text(isArabic ? "نسيت كلمة المرور" : "I Forgot the Password"),
-                  )  
-                ],
-              ),
-
+              
               // Spacer to add 100px vertical space
               SizedBox(height: 100.0),
 
@@ -203,19 +172,10 @@ class _LoginState extends State<LoginRegister> {
                   // Register button
                   CustomButton(
                     label: isArabic ? "تسجيل" : "Register", 
-                    onPressed: (){
-                      Navigator.of(context).pushNamed("registration");
-                    }, 
-                    backColor: Color.fromARGB(1, 234, 234, 241), 
+                    onPressed: _onRegister,
+                    backColor: AppThemes.lightTheme.primaryColor, // Red Color
+                    textColor: AppThemes.lightTheme.scaffoldBackgroundColor, // White Color
                   ),
-                  SizedBox(height: 10,), // space between the buttons
-                  // Login button
-                  CustomButton(
-                    label: isArabic ? "دخول" : "Login", 
-                    onPressed: _onLogin,
-                    backColor: AppThemes.lightTheme.primaryColor, // red Color
-                    textColor: AppThemes.lightTheme.scaffoldBackgroundColor, // white Color
-                  ),  
                 ],
               ) 
             ],
