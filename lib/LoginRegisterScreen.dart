@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'themes/theme.dart';  
 import 'language/RTLText.dart';  
@@ -23,7 +21,6 @@ class _LoginState extends State<LoginRegister> {
   // Hide Password at TextField
   bool _obscureText= true ;
   
-
   // get the Textfield content
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();

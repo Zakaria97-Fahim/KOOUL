@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'themes/theme.dart';  
 import 'language/RTLText.dart';  
@@ -61,6 +59,8 @@ class _RegistrationState extends State<Registration> {
     if (phoneValidationResult == null && passwordValidationResult == null) {
       // If all inputs are valid, proceed with Register
       print("Register successful");
+      // open adress details page
+      Navigator.of(context).pushNamed("address");
     } else {
       // Handle validation errors
       if (phoneValidationResult != null) {
@@ -132,7 +132,6 @@ class _RegistrationState extends State<Registration> {
                 labelText: isArabic ? 'البريد الالكتروني' : 'Email',
                 hintText: isArabic ? 'البريد الالكتروني' : 'Email',
                 icon: Icons.alternate_email,
-                text: _phoneController,
               ),
 
               // Full Name input field
@@ -140,7 +139,6 @@ class _RegistrationState extends State<Registration> {
                 labelText: isArabic ? 'الاسم الكامل' : 'Full Name',
                 hintText: isArabic ?  'الاسم الكامل' : 'Full Name',
                 icon: Icons.person_outline,
-                text: _phoneController,
               ),
               // Password input field
               CustomTextField(

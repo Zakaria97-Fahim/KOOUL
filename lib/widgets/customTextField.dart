@@ -21,20 +21,31 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      
       obscureText: obscureText,  // Hide text if true
+      controller: text,          // to Get the Content of TextField
       decoration: InputDecoration(
+
         labelText: labelText,
         hintText: hintText,
-        prefixIcon: icon != null ? Icon(icon) : null,  // Display icon if provided
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(40),  // Rounded corners for the field
-        ),
-        // other elements added
         hintStyle: TextStyle(color: Colors.grey),  // grey Color
         labelStyle: TextStyle(color: Colors.black), // black Color
+
+        prefixIcon: icon != null ? Icon(icon,color: Colors.grey) : null,  // Display icon if provided
         suffixIcon: suffixIcon != null ? suffixIcon : null,  // Display icon if provided
+
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(40),  // Rounded corners for the field
+          borderSide: BorderSide(color: Colors.black), // Border color when focused
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(40),  // Rounded corners for the field
+          borderSide: BorderSide(color: Colors.grey), // Border color when enabled
+        ),
+       
       ),
-      controller: text,
+
+      
     );
   }
 }
