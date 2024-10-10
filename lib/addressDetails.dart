@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'themes/theme.dart';  
 import 'language/RTLText.dart';  
-import 'language/languageToggleButton.dart';
 import 'widgets/customButton.dart';
 import 'widgets/iconWidget.dart';
 import 'widgets/headerWidget.dart';
@@ -26,7 +25,8 @@ class _AddressDetailsState extends State<AddressDetails> {
       child: Scaffold(
         // Padding to ensure 15px of space around all sides of the content      
         body: Padding( 
-          padding: const EdgeInsets.all(15.0),  
+          padding: const EdgeInsets.all(15.0),
+          // Column Where All Widgets Exists   
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,  // Distributes space evenly between widgets and the borders
             crossAxisAlignment: CrossAxisAlignment.start,  // Aligns all widgets to start from the layout border
@@ -34,17 +34,17 @@ class _AddressDetailsState extends State<AddressDetails> {
               // Row for Head Title and Icon Back Button
               Row(
                 children: [
-                   // ComeBack Icon
+                   // ComeBack Icon '->'
                   IconButton(
                     onPressed: (){Navigator.pop(context);}, 
                     icon: const IconWidget(iconData: Icons.arrow_back_sharp)
                   ),
-                  // Language Switch Button
+                  // Title
                   const Text("تفاصيل العنوان", style: TextStyle(fontSize: 28),)
                 ],
               ),
                            
-              // location Icon + City and neighborhood + modify Button
+              // location Icon + City and Neighborhood + modify Button
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -60,10 +60,14 @@ class _AddressDetailsState extends State<AddressDetails> {
                           shape: BoxShape.circle, // Makes the container circular
                           border: Border.all(color: Colors.grey, width: 1), // Thin grey border
                         ),
-                        child: const Icon(
-                          Icons.location_on_outlined,
-                          color: Colors.black, // Icon color
-                          size: 30, // Icon size
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('mapPage');
+                          },
+                          icon: const IconWidget(
+                            iconData: Icons.location_on_outlined,
+                          ),
+                          
                         ),
                       ),
                       const SizedBox(width: 10,),
@@ -92,7 +96,6 @@ class _AddressDetailsState extends State<AddressDetails> {
                   )
                 ],
               ),
-
               // Door number input field
               const CustomTextField(
                 labelText: 'رقم لباب',

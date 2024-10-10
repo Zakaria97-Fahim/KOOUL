@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'themes/theme.dart';
-import 'language/RTLText.dart';
 import 'welcomeScreen.dart';
 import 'loginRegisterScreen.dart';
 import 'registration.dart';
 import 'addressDetails.dart';
+import 'integrateMapWidget.dart';
 /*
  *-import 'themes/theme.dart'; 
     These settings will apply a consistent look (lightTheme) across the entire app.
@@ -34,34 +34,26 @@ class MyApp extends StatelessWidget {
         "login": (context) => const LoginRegister(),
         "registration": (context) => const Registration(),
         "address": (context) => const AddressDetails(),
-
+        "mapPage": (context) => const IntegrateMap(),
       },
       /* Routes:
         * provides route management for navigation between screens.
         * Defines available routes in the app. These routes are key-value pairs,
         * where the key is the route name and the value is the corresponding screen.
-        * "intro" navigates to the WelcomeScreen, and "login" to the LoginRegister screen.
+        * "intro" navigates to the WelcomeScreen, and "login" to the LoginRegister screen. The same for the Others.        
       */
     );
   }
 }
 
-
+// Loading Page
 class LoadingPage extends StatefulWidget {
   const LoadingPage({super.key});
   @override
   _LoadingPageState createState() => _LoadingPageState();
 }
 
-
 class _LoadingPageState extends State<LoadingPage> {
-  @override
-  void initState() {
-    Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(context, _createRoute());
-    });
-    super.initState();
-  }
   /* initState() :
    * This method is called when the stateful widget is first created. 
    * - A delay of 2 seconds is introduced using Future.delayed.
@@ -70,27 +62,39 @@ class _LoadingPageState extends State<LoadingPage> {
    * - _createRoute() is a custom function used to define the route transition.
    * - The parent's initState() is called at the end to ensure proper initialization.
   */
-
-
   @override
-  Widget build(BuildContext context) {
-    return RTLPage( 
-      child:Scaffold(
-        backgroundColor: AppThemes.lightTheme.primaryColor,
-        body: Center(
-          child: Image.asset('assets/images/Logomark.png', fit: BoxFit.fill),
-        ),
-      )
-    ); 
+  void initState() {
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushReplacement(context, _createRoute());
+    });
+    super.initState();
   }
-  /* 
-   * - RTLPage() is used to handle right-to-left text formatting, making the page compatible with RTL languages.
-   * - Scaffold is the base structure for the page, with the primaryColor of the app theme as the background color.
+   
+  /* - Scaffold is the base structure for the page, with the primaryColor of the app theme as the background color.
    * - The body contains a centered image widget that displays 'Logomark.png' from the assets, 
    *   and BoxFit.fill ensures the image covers the available space in its container.
-   */
-
-
+  */
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppThemes.lightTheme.primaryColor,
+      body: Center(
+        child: Image.asset('assets/images/Logomark.png', fit: BoxFit.fill),
+      ),
+    );
+  }
+  
+  /* createRoute() :
+   * - Defines a custom route transition using PageRouteBuilder.
+   * - transitionDuration is set to 1500 milliseconds (1.5 seconds), controlling the duration of the animation.
+   * - pageBuilder() returns the target page, in this case, WelcomeScreen(), and it builds the screen during the transition.
+   * - transitionsBuilder() handles the animation:
+   *    - Offset(0.0, 1.0) means the animation starts from the bottom of the screen.
+   *    - Offset(0.0, 0.0) means it ends at the top (normal position).
+   *    - Curves.easeInOut provides a smooth transition effect.
+   *    - Tween() interpolates the movement from start to end using the defined curve.
+   *    - SlideTransition animates the child's position based on the offsetAnimation, making the new screen slide in from the bottom.
+  */
   Route _createRoute() {
     return PageRouteBuilder(
       transitionDuration: Duration(milliseconds: 1500), // Adjust the duration here
@@ -110,15 +114,5 @@ class _LoadingPageState extends State<LoadingPage> {
       },
     );
   }
-  /* createRoute() :
-   * - Defines a custom route transition using PageRouteBuilder.
-   * - transitionDuration is set to 1500 milliseconds (1.5 seconds), controlling the duration of the animation.
-   * - pageBuilder() returns the target page, in this case, WelcomeScreen(), and it builds the screen during the transition.
-   * - transitionsBuilder() handles the animation:
-   *    - Offset(0.0, 1.0) means the animation starts from the bottom of the screen.
-   *    - Offset(0.0, 0.0) means it ends at the top (normal position).
-   *    - Curves.easeInOut provides a smooth transition effect.
-   *    - Tween() interpolates the movement from start to end using the defined curve.
-   *    - SlideTransition animates the child's position based on the offsetAnimation, making the new screen slide in from the bottom.
-   */
+  
 }

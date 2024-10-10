@@ -104,7 +104,7 @@ class _LoginState extends State<LoginRegister> {
      * When click on button Language, the entire layout will automatically mirror, aligning the UI elements to the right, which is the standard for RTL language interfaces.
     */
 
-    return RTLPage(   
+    return RTLPage(    
       isArabic: isArabic,        
       child: Scaffold(
         // Padding to ensure 15px of space around all sides of the content      

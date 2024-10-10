@@ -102,6 +102,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>{
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // login with phone number
                   CustomButton(
                     label: "دخول برقم الهاتف", 
                     onPressed: (){
@@ -111,6 +112,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>{
                     textColor: AppThemes.lightTheme.scaffoldBackgroundColor,
                   ),
                   SizedBox(height: 10,),
+                  // login with google account
                   CustomButton(
                     label: "Google دخول بحساب", 
                     onPressed: (){
