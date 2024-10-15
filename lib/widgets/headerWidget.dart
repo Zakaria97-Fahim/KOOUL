@@ -14,7 +14,6 @@ class HeaderWidget extends StatelessWidget {
     required this.title,
     required this.subtitle,
     this.textAlign = TextAlign.center, // Default to center alignment
-
     this.sizeTitle = 30,
     this.sizeSubtitle = 16,
     this.titleColor = Colors.black,

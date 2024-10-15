@@ -13,6 +13,12 @@ class AddressDetails extends StatefulWidget {
 }
 
 class _AddressDetailsState extends State<AddressDetails> {
+  // the number of customer
+  final TextEditingController _doorNbr = TextEditingController();
+  // the Building number
+  final TextEditingController _buildNbr = TextEditingController();
+  // the full Adress 
+  final TextEditingController _fullAdress = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +73,6 @@ class _AddressDetailsState extends State<AddressDetails> {
                           icon: const IconWidget(
                             iconData: Icons.location_on_outlined,
                           ),
-                          
                         ),
                       ),
                       const SizedBox(width: 10,),
@@ -97,22 +102,25 @@ class _AddressDetailsState extends State<AddressDetails> {
                 ],
               ),
               // Door number input field
-              const CustomTextField(
+              CustomTextField(
                 labelText: 'رقم لباب',
                 hintText: 'رقم لباب',
                 icon: Icons.door_back_door,
+                text: _doorNbr,
               ),
-              // Architecture number input field
-              const CustomTextField(
+                // Building number input field
+              CustomTextField(
                 labelText: 'رقم العمارة',
                 hintText: 'رقم العمارة',
                 icon: Icons.apartment,
+                text: _buildNbr,
               ),
               // More Details input field
-              const CustomTextField(
+              CustomTextField(
                 labelText: 'تفاصيل اضافية',
                 hintText: 'تفاصيل اضافية',
                 icon: Icons.info_outline,
+                text: _fullAdress,
               ),
               
               // Spacer to add 100px vertical space

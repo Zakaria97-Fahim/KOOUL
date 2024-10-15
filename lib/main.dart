@@ -4,7 +4,7 @@ import 'welcomeScreen.dart';
 import 'loginRegisterScreen.dart';
 import 'registration.dart';
 import 'addressDetails.dart';
-import 'integrateMapWidget.dart';
+import 'mapWidget.dart';
 /*
  *-import 'themes/theme.dart'; 
     These settings will apply a consistent look (lightTheme) across the entire app.
@@ -97,11 +97,11 @@ class _LoadingPageState extends State<LoadingPage> {
   */
   Route _createRoute() {
     return PageRouteBuilder(
-      transitionDuration: Duration(milliseconds: 1500), // Adjust the duration here
+      transitionDuration: const Duration(milliseconds: 1500),
       pageBuilder: (context, animation, secondaryAnimation) => const WelcomeScreen(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(0.0, 1.0); // Start from bottom
-        const end = Offset(0.0, 0.0);   // End at top
+        const end = Offset.zero;         // End at original position
         const curve = Curves.easeInOut;
 
         var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
@@ -113,6 +113,5 @@ class _LoadingPageState extends State<LoadingPage> {
         );
       },
     );
-  }
-  
+  }  
 }
