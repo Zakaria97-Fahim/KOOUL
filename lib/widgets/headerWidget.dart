@@ -8,6 +8,8 @@ class HeaderWidget extends StatelessWidget {
   final double sizeSubtitle;         // font size
   final Color titleColor;    // Color 
   final Color subtitleColor; // Color 
+  final TextDirection direction ; // Text direction RTL
+
   // Constructor: Takes title, subtitle, and textAlign as parameters
   const HeaderWidget({
     Key? key,
@@ -18,11 +20,14 @@ class HeaderWidget extends StatelessWidget {
     this.sizeSubtitle = 16,
     this.titleColor = Colors.black,
     this.subtitleColor = Colors.black,
+    this.direction = TextDirection.rtl // Default direction
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Directionality(
+      textDirection: direction,
+      child: Column(
       crossAxisAlignment: textAlign == TextAlign.center
           ? CrossAxisAlignment.center
           : CrossAxisAlignment.start, // Align based on the textAlign parameter
@@ -45,6 +50,9 @@ class HeaderWidget extends StatelessWidget {
           textAlign: textAlign,
         ),
       ],
+      ),
     );
+    
+    
   }
 }

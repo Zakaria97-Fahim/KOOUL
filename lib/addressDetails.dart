@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:project_name/widgets/buttonWithIcon.dart';
+import 'package:project_name/widgets/iconButton.dart';
+import 'package:project_name/widgets/iconContainer.dart';
+import 'package:project_name/widgets/listTileAdresse.dart';
 import 'themes/theme.dart';  
 import 'language/RTLText.dart';  
 import 'widgets/customButton.dart';
 import 'widgets/iconWidget.dart';
-import 'widgets/headerWidget.dart';
 import 'widgets/customTextField.dart';
 
 class AddressDetails extends StatefulWidget {
@@ -43,8 +46,9 @@ class _AddressDetailsState extends State<AddressDetails> {
                    // ComeBack Icon '->'
                   IconButton(
                     onPressed: (){Navigator.pop(context);}, 
-                    icon: const IconWidget(iconData: Icons.arrow_back_sharp)
+                    icon: const IconWidget(iconData: Icons.arrow_back_sharp, size: 30,)
                   ),
+                  SizedBox(width: 20),
                   // Title
                   const Text("تفاصيل العنوان", style: TextStyle(fontSize: 28),)
                 ],
@@ -53,51 +57,43 @@ class _AddressDetailsState extends State<AddressDetails> {
               // location Icon + City and Neighborhood + modify Button
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // location Icon + City and neighborhood
-                  Row(
-                    children: [
-                      // Location Icon
-                      Container(
-                        width: 60, // Circle width
-                        height: 60, // Circle height
-                        decoration: BoxDecoration(
-                          color: Colors.white, // Circle background color
-                          shape: BoxShape.circle, // Makes the container circular
-                          border: Border.all(color: Colors.grey, width: 1), // Thin grey border
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.of(context).pushNamed('mapPage');
-                          },
-                          icon: const IconWidget(
-                            iconData: Icons.location_on_outlined,
-                          ),
-                        ),
+                  Expanded(
+                    child: ListTileAdresse(
+                      // Title
+                      title: 'Casablanca', 
+                      sizeTitle: 14,
+                      fontWeight: FontWeight.bold,
+                      // SubTitle
+                      subtitle: 'Grand Casablanca',
+                      sizeSubtitle: 12,
+                      subtitleColor: Colors.grey,
+
+                      textAlign: TextAlign.start,
+                      // Leading
+                      iconButtonContainer: IconContainer(
+                        width: 48,
+                        height: 48,
+                        iconButtonWidget: IconButtonWidget(
+                          iconWidget: const IconWidget(iconData: Icons.location_on_outlined,),
+                          onpressed: () { Navigator.of(context).pushNamed('mapPage', arguments: "Address"); },
+                        )
                       ),
-                      const SizedBox(width: 10,),
-                      // City & Neighborhood
-                      const HeaderWidget(
-                        title: 'Casablanca', 
-                        subtitle: 'Grand Casablanca',
-                        textAlign: TextAlign.start,
-                        sizeTitle: 14,
-                        sizeSubtitle: 12,
-                        subtitleColor: Colors.grey,
-                      )
-                    ],
-                  ),
-                  // Modify Button
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      print("Button Pressed");
-                    },
-                    icon: Icon(Icons.autorenew, color: Colors.black,), // The rotate icon you want to display
-                    label: Text('تغيير', style: TextStyle(color: Colors.black),), // The text next to the icon
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8), 
-                      backgroundColor: const Color.fromARGB(1,234, 234, 241),
+                      ontap: () { Navigator.of(context).pushNamed('mapPage', arguments: "Address"); },
                     ),
+                  ),  
+                  // Modify Button
+                  ButtonWithIcon(
+                    iconData: Icons.autorenew,
+                    text: 'تغيير',
+                    btnColor: Color.fromARGB(1,234, 234, 241),
+                    paddingH: 24,
+                    paddingV: 12,
+                    onpressed: () {
+                      print("Button Pressed");                      
+                    },
                   )
                 ],
               ),
@@ -122,14 +118,16 @@ class _AddressDetailsState extends State<AddressDetails> {
                 icon: Icons.info_outline,
                 text: _fullAdress,
               ),
-              
               // Spacer to add 100px vertical space
               const SizedBox(height: 100.0),
-
               // Entry button
               CustomButton(
                 label:"دخول", 
-                onPressed: (){},
+                onPressed: (){
+                  // open the mapWidget and Pass the address and building number as arguments
+                  Navigator.of(context)
+                    .pushNamed('mapPage',  arguments: '${_fullAdress.text} ${_buildNbr.text} ${_fullAdress.text}');
+                },
                 backColor: AppThemes.lightTheme.primaryColor, // Red Color
                 textColor: AppThemes.lightTheme.scaffoldBackgroundColor, // White Color
               ),

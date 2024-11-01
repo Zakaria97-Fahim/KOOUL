@@ -4,6 +4,7 @@ import 'welcomeScreen.dart';
 import 'loginRegisterScreen.dart';
 import 'registration.dart';
 import 'addressDetails.dart';
+import 'addresses.dart';
 import 'mapWidget.dart';
 /*
  *-import 'themes/theme.dart'; 
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
         "login": (context) => const LoginRegister(),
         "registration": (context) => const Registration(),
         "address": (context) => const AddressDetails(),
-        "mapPage": (context) => const IntegrateMap(),
+        "mapPage": (context) => IntegrateMap(),
+        "addresses": (context) => Addresses(),
       },
       /* Routes:
         * provides route management for navigation between screens.

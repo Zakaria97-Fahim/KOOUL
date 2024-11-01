@@ -6,19 +6,22 @@ import 'package:location/location.dart'; // Importing the location package to ha
 
 import 'package:http/http.dart' as http; // For making API requests (e.g., querying the Google Places API)
 import 'package:project_name/buildBottomSheet.dart';
+import 'package:project_name/titlesBottomSheet.dart';
+import 'package:project_name/widgets/buttonWithIcon.dart';
 import 'package:project_name/widgets/iconButton.dart';
 import 'package:project_name/widgets/iconContainer.dart';
+import 'package:project_name/widgets/listTileAdresse.dart';
 import 'dart:convert'; // For jsonDecode
 
 import 'language/RTLText.dart'; 
 import 'widgets/iconWidget.dart';
 
-class IntegrateMap extends StatefulWidget {  
+class Addresses extends StatefulWidget {  
   @override
-  _IntegrateMapState createState() => _IntegrateMapState();
+  _AddressesState createState() => _AddressesState();
 }
 
-class _IntegrateMapState extends State<IntegrateMap> {
+class _AddressesState extends State<Addresses> {
   // Initialize Location instance
   Location location = Location();
   // initial Position at the map
@@ -38,15 +41,16 @@ class _IntegrateMapState extends State<IntegrateMap> {
     // Override the didChangeDependencies() method to perform tasks when widget's dependencies change (or on first load).
     super.didChangeDependencies(); 
     // Call the parent class's didChangeDependencies() to ensure proper behavior of inherited dependencies.
-    final args = ModalRoute.of(context)?.settings.arguments as String; 
+    final args = ModalRoute.of(context)?.settings.arguments as LatLng; 
+
     // Retrieve the arguments (here, the address) passed to this screen through the route's settings.
     setState(() { 
-      displayAddress = args; 
-    });  
+      initialPosition = args; 
+    });     
   }
   
   // Get user location and request necessary permissions
-  Future<void> getUserLocation() async {
+  Future<void> getUserLocationSearch() async {
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
     // Check if the location service is enabled
@@ -67,18 +71,14 @@ class _IntegrateMapState extends State<IntegrateMap> {
         return;
       }
     }
-    // Get user location
-    var userLocation = await location.getLocation();
     // Update the UI with the user location and stop loading
     setState(() {
-      // Set the initial position to the user's current location
-      initialPosition = LatLng(userLocation.latitude!, userLocation.longitude!);
       // Add a marker for the user's current location on the map    
       markers.add(
         Marker(
-          markerId: MarkerId('current_location'),
+          markerId: MarkerId('search_location'),
           position: initialPosition,
-          infoWindow: InfoWindow(title: 'Your Location'),
+          infoWindow: InfoWindow(title: 'Search Location'),
         ),
       );
       isLoading = false;
@@ -127,10 +127,9 @@ class _IntegrateMapState extends State<IntegrateMap> {
   void initState() {
     super.initState();
     // Get user location and request necessary permissions
-    getUserLocation();
+    getUserLocationSearch();
   }
   
-
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +172,7 @@ class _IntegrateMapState extends State<IntegrateMap> {
               Positioned(
                 top: 30, left: 20,           // position of position icon button  
                 child: IconContainer(            // used to have a circular Background
-                  height: 48, 
+                  height: 48,
                   width: 48,
                   backgroundColor: Colors.white, 
                   iconButtonWidget: IconButtonWidget(
@@ -182,50 +181,7 @@ class _IntegrateMapState extends State<IntegrateMap> {
                   ),
                 ),  
               ),
-              // Display Current Address on Map at floating card 
-              Center(
-                child: Container(
-                height: 110, width: 256, padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Card( // Floating card 
-                  child:Row(
-                      children: [
-                        SizedBox(width: 10),
-                        // 1st Item : Check Circle Icon
-                        Container(     
-                          padding: EdgeInsets.all(15),
-                          decoration: BoxDecoration(color: Color.fromARGB(245, 229, 251, 246),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: const IconWidget(
-                            iconData: Icons.check_circle,
-                            color: Colors.green,
-                            size: 20,
-                          ),
-                        ),
-                        SizedBox(width: 5),
-                        // Address Text
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text('$displayAddress'), // the Address
-                            TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                'استخدم هذه العنوان', 
-                                style: TextStyle(
-                                  fontSize: 12,fontWeight: FontWeight.w500,
-                                  color:Color.fromARGB(255, 29, 177, 142),
-                                ),
-                              )
-                            ),
-                          ],
-                        ), 
-                      ] 
-                    )
-                  ),
-                ),
-              ),
-              SearchBottomSheet(selectLocation: _selectLocation)
+              TitlesBottomSheet()
             ])
       ),
     );

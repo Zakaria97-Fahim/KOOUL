@@ -2,30 +2,24 @@ import 'package:flutter/material.dart';
 
 class IconWidget extends StatelessWidget {
   final String? imagePath; // Add an imagePath for the asset images
+  final IconData? iconData; // Optional IconData for vector icons
   final double size;
   final Color color;
-  final IconData? iconData; // Optional IconData for vector icons
 
   const IconWidget({
-    Key? key,
+    super.key,
     this.imagePath, // Optional image path
     this.iconData,  // Optional IconData
-    this.size = 30.0,
+    this.size = 16.0,
     this.color = Colors.black,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return imagePath != null
-        ? Image.asset(  // If imagePath is provided, display the image
-            imagePath!,
-            width: size,
-            height: size,
-          )
-        : Icon( // Otherwise, display the IconData
-            iconData,
-            size: size,
-            color: color,
-          );
+    // If imagePath is provided, display the image
+      ? Image.asset(  imagePath!,width: size, height: size)
+    // Otherwise, display the IconData  
+      : Icon(iconData, size: size, color: color);
   }
 }
