@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_name/entryScreen.dart';
 import 'themes/theme.dart';
 import 'welcomeScreen.dart';
 import 'loginRegisterScreen.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         "addresses": (context) => Addresses(),
         "home": (context) => Home(),
         "storeProducts": (context) => StoreProducts(),
+        "entryScreen": (context) => EntryScreen(),
       },
       /* Routes:
         * provides route management for navigation between screens.

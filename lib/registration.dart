@@ -60,7 +60,7 @@ class _RegistrationState extends State<Registration> {
       // If all inputs are valid, proceed with Register
       print("Register successful");
       // open adress details page
-      Navigator.of(context).pushNamed("address");
+      Navigator.of(context).pushNamed("entryScreen");
     } else {
       // Handle validation errors
       if (phoneValidationResult != null) {
