@@ -5,12 +5,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart'; // Importing Goog
 import 'package:location/location.dart'; // Importing the location package to handle fetching the user's location
 
 import 'package:http/http.dart' as http; // For making API requests (e.g., querying the Google Places API)
-import 'package:project_name/buildBottomSheet.dart';
 import 'package:project_name/titlesBottomSheet.dart';
-import 'package:project_name/widgets/buttonWithIcon.dart';
 import 'package:project_name/widgets/iconButton.dart';
 import 'package:project_name/widgets/iconContainer.dart';
-import 'package:project_name/widgets/listTileAdresse.dart';
 import 'dart:convert'; // For jsonDecode
 
 import 'language/RTLText.dart'; 
@@ -177,7 +174,7 @@ class _AddressesState extends State<Addresses> {
                   backgroundColor: Colors.white, 
                   iconButtonWidget: IconButtonWidget(
                     iconWidget: const IconWidget(iconData: Icons.my_location, size: 30),
-                    onpressed: (){ Navigator.pushNamed(context, 'addresses', arguments: initialPosition); }
+                    onpressed: (){ Navigator.pushReplacementNamed(context, 'home'); }
                   ),
                 ),  
               ),

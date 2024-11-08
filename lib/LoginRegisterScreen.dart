@@ -121,7 +121,7 @@ class _LoginState extends State<LoginRegister> {
                    // ComeBack Icon
                   IconButton(
                     onPressed: (){Navigator.pop(context);}, 
-                    icon: IconWidget(iconData: Icons.arrow_back_sharp)
+                    icon: IconWidget(iconData: Icons.arrow_back_sharp , size: 30)
                   ),
                   // Language Switch Button
                   LanguageToggleButton(

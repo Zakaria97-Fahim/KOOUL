@@ -178,7 +178,7 @@ class _IntegrateMapState extends State<IntegrateMap> {
                   backgroundColor: Colors.white, 
                   iconButtonWidget: IconButtonWidget(
                     iconWidget: const IconWidget(iconData: Icons.my_location, size: 30),
-                    onpressed: (){ Navigator.pushNamed(context, 'addresses', arguments: initialPosition); }
+                    onpressed: (){}
                   ),
                 ),  
               ),
@@ -209,9 +209,9 @@ class _IntegrateMapState extends State<IntegrateMap> {
                           children: [
                             Text('$displayAddress'), // the Address
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {Navigator.pushNamed(context, 'addresses', arguments: initialPosition);},
                               child: const Text(
-                                'استخدم هذه العنوان', 
+                                'استخدم هذا العنوان', 
                                 style: TextStyle(
                                   fontSize: 12,fontWeight: FontWeight.w500,
                                   color:Color.fromARGB(255, 29, 177, 142),
@@ -226,7 +226,8 @@ class _IntegrateMapState extends State<IntegrateMap> {
                 ),
               ),
               SearchBottomSheet(selectLocation: _selectLocation)
-            ])
+            ]
+          )
       ),
     );
   }

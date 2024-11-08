@@ -13,7 +13,7 @@ class RTLPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr, // Set RTL direction
+      textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr, // Set RTL direction 
       child: child, // The page content passed in
     );
   }

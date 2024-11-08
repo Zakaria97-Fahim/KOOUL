@@ -30,6 +30,31 @@ flutter:
     - assets/images/Logomark.png  
     - assets/images/BackgroundAnimation.png
     - assets/images/question.png  
+    - assets/images/path20.png
+    - assets/images/artBoard/Artboard1.png
+    - assets/images/artBoard/Artboard2.png
+    - assets/images/artBoard/Artboard3.png
+    - assets/images/artBoard/Artboard4.png
+    - assets/images/artBoard/Artboard5.png
+    - assets/images/artBoard/Artboard6.png
+    - assets/images/artBoard/Artboard7.png
+    - assets/images/stapleFood/card1.jpg
+    - assets/images/stapleFood/card2.png
+    - assets/images/stapleFood/card3.png
+    - assets/images/BurgerKing.png
+    - assets/images/Rectangle1.png
+    - assets/images/Rectangle2.png
+    - assets/images/support/support.png
+    - assets/images/support/support2.png
+    - assets/images/drinks/coca.png
+    - assets/images/drinks/coca2.png
+    - assets/images/drinks/sprite.png
+    - assets/images/toppings/mustard.png
+    - assets/images/toppings/ketchup.png
+    - assets/images/toppings/onion.png
+    - assets/images/toppings/pickles.png
+    - assets/images/toppings/meat.png
+
   fonts:
     - family: Quicksand-Bolds
       fonts:

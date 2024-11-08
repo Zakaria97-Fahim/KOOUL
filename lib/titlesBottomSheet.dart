@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:project_name/widgets/buttonWithIcon.dart';
 import 'package:project_name/widgets/iconButton.dart';
 import 'package:project_name/widgets/iconContainer.dart';
@@ -155,7 +152,7 @@ class __TitlesBottomSheetState extends State<TitlesBottomSheet> {
           iconColor: iconClr,
           text: text,
           textColor: textColor,
-          btnColor: btnColor,
+          backgroundColor: btnColor,
           onpressed: (){},
         ),
       ],

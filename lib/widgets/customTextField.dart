@@ -25,7 +25,6 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,  // Hide text if true
       controller: text,          // to Get the Content of TextField
       decoration: InputDecoration(
-
         labelText: labelText,
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.grey),  // grey Color
@@ -41,11 +40,8 @@ class CustomTextField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(40),  // Rounded corners for the field
           borderSide: BorderSide(color: Colors.grey), // Border color when enabled
-        ),
-       
+        ),       
       ),
-
-      
     );
   }
 }

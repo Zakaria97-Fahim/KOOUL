@@ -98,7 +98,7 @@ class _RegistrationState extends State<Registration> {
                    // ComeBack Icon
                   IconButton(
                     onPressed: (){Navigator.pop(context);}, 
-                    icon: IconWidget(iconData: Icons.arrow_back_sharp)
+                    icon: IconWidget(iconData: Icons.arrow_back_sharp, size: 30)
                   ),
                   // Language Switch Button
                   LanguageToggleButton(
@@ -146,7 +146,7 @@ class _RegistrationState extends State<Registration> {
                 hintText: isArabic ? 'كلمة المرور' : 'Password',
                 icon: Icons.lock_outline,
                 suffixIcon: IconButton(  
-                    icon: Icon(                    // Eye icon to toggle password visibility
+                    icon: Icon(    // Eye icon to toggle password visibility
                       _obscureText ? Icons.visibility_off : Icons.visibility,  // Shows visibility icon based on _obscureText
                       color: Colors.grey,
                     ),

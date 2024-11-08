@@ -190,13 +190,13 @@ class _SearchBottomSheetState extends State<SearchBottomSheet> {
         // Places List
         Expanded(
           child: searchResults.isNotEmpty
-              ? ListView.builder(
-                  itemCount: searchResults.length,
-                  itemBuilder: (context, index) {
-                    return _buildLocationInfo(searchResults[index], TextDirection.rtl);
-                  },
-                )
-              : const Center(child: Text('No results found')),
+            ? ListView.builder(
+                itemCount: searchResults.length,
+                itemBuilder: (context, index) {
+                  return _buildLocationInfo(searchResults[index], TextDirection.rtl);
+                },
+              )
+            : const Center(child: Text('No results found')),
         ),
       ],
     );
@@ -216,7 +216,7 @@ class _SearchBottomSheetState extends State<SearchBottomSheet> {
         ButtonWithIcon(
           iconData: Icons.search,
           text: 'بحث',
-          btnColor: Color.fromARGB(1, 234, 234, 241),
+          backgroundColor: Color.fromARGB(1, 234, 234, 241),
           paddingH: 24,
           paddingV: 14,
           onpressed: (){

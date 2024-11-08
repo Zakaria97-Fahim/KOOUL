@@ -3,9 +3,12 @@ import 'themes/theme.dart';
 import 'welcomeScreen.dart';
 import 'loginRegisterScreen.dart';
 import 'registration.dart';
-import 'addressDetails.dart';
+import 'addressdetails.dart';
 import 'addresses.dart';
 import 'mapWidget.dart';
+import 'home.dart';
+import 'storeProducts.dart';
+
 /*
  *-import 'themes/theme.dart'; 
     These settings will apply a consistent look (lightTheme) across the entire app.
@@ -37,6 +40,8 @@ class MyApp extends StatelessWidget {
         "address": (context) => const AddressDetails(),
         "mapPage": (context) => IntegrateMap(),
         "addresses": (context) => Addresses(),
+        "home": (context) => Home(),
+        "storeProducts": (context) => StoreProducts(),
       },
       /* Routes:
         * provides route management for navigation between screens.
