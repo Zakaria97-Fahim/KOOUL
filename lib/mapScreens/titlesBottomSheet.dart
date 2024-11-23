@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:project_name/widgets/buttonWithIcon.dart';
 import 'package:project_name/widgets/iconButton.dart';
 import 'package:project_name/widgets/iconContainer.dart';
@@ -6,14 +7,25 @@ import 'package:project_name/widgets/iconWidget.dart';
 import 'package:project_name/widgets/listTileAdresse.dart';
 
 class TitlesBottomSheet extends StatefulWidget {
+  final LatLng markerPostion; // Property to hold marker position
+
+  final Function(String, LatLng, int, bool) onDataReceived; // Callback function to pass the data back
+
+  TitlesBottomSheet({
+    required this.onDataReceived,
+    required this.markerPostion,
+  });
+
   @override
   __TitlesBottomSheetState createState() => __TitlesBottomSheetState();
 }
 
-class __TitlesBottomSheetState extends State<TitlesBottomSheet> {  
+class __TitlesBottomSheetState extends State<TitlesBottomSheet> {
+  late LatLng position;
 
   final sheet = GlobalKey();
   final controller = DraggableScrollableController();
+
   /* Adds a listener to the controller to monitor changes in the sheet's scrollable size 
    and call [onChanged] whenever it changes. */
   @override
@@ -21,6 +33,8 @@ class __TitlesBottomSheetState extends State<TitlesBottomSheet> {
     super.initState();
     // Adding a listener to the controller to detect size changes
     controller.addListener(() {});
+    position = widget.markerPostion; // Use `widget.markerPostion` here
+
   }
   /*
     * Called whenever the DraggableScrollableSheet changes size.
@@ -53,8 +67,7 @@ class __TitlesBottomSheetState extends State<TitlesBottomSheet> {
     );
   }
   DraggableScrollableSheet get getSheet => sheet.currentWidget as DraggableScrollableSheet;
-
-
+  
   /* 
     * Builds a bottom sheet widget that displays either a search interface or a button row based on 
     the current state of the 'isSearch' boolean variable. 
@@ -90,6 +103,9 @@ class __TitlesBottomSheetState extends State<TitlesBottomSheet> {
             Icons.home_rounded,             // leading Icon
             Color.fromRGBO(249, 249, 251, 1), // leading Icon Color
             Color.fromRGBO(51, 51, 77, 1),    // leading Icon BackgroundColor 
+            (){
+              widget.onDataReceived( 'House', position, 0, true); // Pass both values back
+            }
           ),
           
           _buildTitleRow(
@@ -105,6 +121,9 @@ class __TitlesBottomSheetState extends State<TitlesBottomSheet> {
             Icons.work_outline,     // leading Icon
             Color.fromRGBO(249, 249, 251, 1), // leading Icon Color
             Color.fromRGBO(51, 51, 77, 1),    // leading Icon BackgroundColor 
+            (){
+              widget.onDataReceived('Job', position, 1, true); // Pass both values back
+            }
           ),
 
           _buildTitleRow(
@@ -120,6 +139,9 @@ class __TitlesBottomSheetState extends State<TitlesBottomSheet> {
             Icons.apartment_outlined,        // leading Icon
             Color.fromRGBO(51, 51, 77, 1),    // leading Icon Color
             Color.fromRGBO(234, 234, 241, 1), // leading Icon BackgroundColor 
+            (){
+              widget.onDataReceived('lorem', position, 2, true); // Pass both values back
+            }
           ),
 
           _buildTitleRow(
@@ -135,31 +157,34 @@ class __TitlesBottomSheetState extends State<TitlesBottomSheet> {
             Icons.apartment_rounded,        // leading Icon
             Color.fromRGBO(51, 51, 77, 1),    // leading Icon Color
             Color.fromRGBO(234, 234, 241, 1), // leading Icon BackgroundColor 
+            (){
+              widget.onDataReceived('new', position, 3, true); // Pass both values back
+            }
           ),                            
         ],//rgba(203, 203, 220, 1)
       ),
     );
   }
   
-  Widget _buildTitleRow(text,iconBtn,textColor,iconClr,btnColor, place,address,leadingIcon,iconColor,backIconColor){
+  Widget _buildTitleRow(text,iconBtn,textColor,iconClr,btnColor, place,address,leadingIcon,iconColor,backIconColor,onPressed){
     // Buttom With Icon
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(child: _TitlesBottomSheet(place, address, leadingIcon, iconColor, backIconColor) ),        
+        Expanded(child: _TitlesBottomSheet(place, address, leadingIcon, iconColor, backIconColor,onPressed) ),        
         ButtonWithIcon(
           iconData: iconBtn,
           iconColor: iconClr,
           text: text,
           textColor: textColor,
           backgroundColor: btnColor,
-          onpressed: (){},
+          onpressed: onPressed
         ),
       ],
     );
   }
 
-  Widget _TitlesBottomSheet(place, address, leadingIcon, iconColor, backIconColor){
+  Widget _TitlesBottomSheet(place, address, leadingIcon, iconColor, backIconColor,onTap){
     return ListTileAdresse(
       // Title
       title: place,
@@ -176,10 +201,10 @@ class __TitlesBottomSheetState extends State<TitlesBottomSheet> {
         backgroundColor: backIconColor,
         iconButtonWidget: IconButtonWidget(
           iconWidget: IconWidget(iconData: leadingIcon, color: iconColor),
-          onpressed: () {}
+          onpressed: onTap,
         )
       ),
-      ontap: () {},
+      ontap: onTap,
     );    
   }
     
@@ -198,12 +223,12 @@ class __TitlesBottomSheetState extends State<TitlesBottomSheet> {
     // DraggableScrollableSheet as a main component in the Stack
     return DraggableScrollableSheet(
       key: sheet,
-      initialChildSize: 0.6,
+      initialChildSize: 0.49,
       minChildSize: 0.05,
-      maxChildSize: 0.6,
+      maxChildSize: 0.49,
       expand: true,
       snap: true,
-      snapSizes: const [0.05, 0.6],
+      snapSizes: const [0.05, 0.49],
       controller: controller,
       builder: (BuildContext context, ScrollController scrollController) {
         return DecoratedBox(

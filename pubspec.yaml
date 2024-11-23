@@ -55,7 +55,16 @@ flutter:
     - assets/images/toppings/onion.png
     - assets/images/toppings/pickles.png
     - assets/images/toppings/meat.png
-
+    - assets/images/mapIcons/marker.png
+    - assets/images/mapIcons/Maybe.png
+    - assets/images/mapIcons/myLocation.png
+    - assets/images/mapIcons/Yes.png
+    - assets/images/mapIcons/No.png
+    - assets/images/mapIcons/home.png
+    - assets/images/mapIcons/job.png
+    - assets/images/mapIcons/homeMarker.png
+    - assets/images/mapIcons/jobMarker.png
+    
   fonts:
     - family: Quicksand-Bolds
       fonts:

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project_name/entryScreen.dart';
+import 'package:project_name/mapScreens/mapScreen.dart';
 import 'themes/theme.dart';
 import 'welcomeScreen.dart';
 import 'loginRegisterScreen.dart';
 import 'registration.dart';
-import 'addressdetails.dart';
-import 'addresses.dart';
-import 'mapWidget.dart';
+import 'mapScreens/addressdetails.dart';
 import 'home.dart';
 import 'storeProducts.dart';
 
@@ -39,8 +38,8 @@ class MyApp extends StatelessWidget {
         "login": (context) => const LoginRegister(),
         "registration": (context) => const Registration(),
         "address": (context) => const AddressDetails(),
-        "mapPage": (context) => IntegrateMap(),
-        "addresses": (context) => Addresses(),
+        "mapPage": (context) => MapScreen(),
+        "add": (context) => MapScreen(),
         "home": (context) => Home(),
         "storeProducts": (context) => StoreProducts(),
         "entryScreen": (context) => EntryScreen(),

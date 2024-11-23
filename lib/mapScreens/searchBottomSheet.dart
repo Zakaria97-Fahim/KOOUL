@@ -9,12 +9,19 @@ import 'package:project_name/widgets/iconWidget.dart';
 import 'package:project_name/widgets/listTileAdresse.dart';
 
 class SearchBottomSheet extends StatefulWidget {
-  final Future<void> Function(String) selectLocation; // Declare the function type
+  
+  final Future<void> Function(String) selectLocation; // Declare the function type  
+  final Function(String) onDataReceived; // Callback function to pass the data back
+  final String initialLocation; // Initial location to be displayed in the search bar
 
   const SearchBottomSheet({
     Key? key,
-    required this.selectLocation, 
+    required this.selectLocation,
+    required this.onDataReceived,
+    required this.initialLocation,
   }) : super(key: key);
+  
+
   @override
   _SearchBottomSheetState createState() => _SearchBottomSheetState();
 }
@@ -26,8 +33,7 @@ class _SearchBottomSheetState extends State<SearchBottomSheet> {
   // List to hold search results (Places)
   List<String> searchResults = [];
 
-  String location = ''; // Initializing without `late`
-
+  late String location; 
 
   /*  Fetches location suggestions from the Google Places API based on the user's input. 
     * This method takes a string input, representing the user's search query, and performs
@@ -74,6 +80,8 @@ class _SearchBottomSheetState extends State<SearchBottomSheet> {
   @override
   void initState() {
     super.initState();
+    location = widget.initialLocation;
+    location == 'Casablanca' ? isSearch = true : isSearch = false ;
     // Adding a listener to the controller to detect size changes
     controller.addListener(() {
       if (controller.size <= 0.2) { // Threshold for detecting if the bottomsheet is minimized
@@ -130,7 +138,7 @@ class _SearchBottomSheetState extends State<SearchBottomSheet> {
   }
   //Dispose of the searchController to free up memory when this widget is removed from the widget tree
   @override
-  void dispose() {
+  void dispose() {    
     searchController.dispose();
     super.dispose();
   }
@@ -155,7 +163,7 @@ class _SearchBottomSheetState extends State<SearchBottomSheet> {
       child: isSearch ? _buildSearchColumn() : _buildButtonRow(),
     );
   }
-
+  
   /*
     * Builds a column widget containing a search field and a list of search results.
     * This widget is used as the search interface when 'isSearch' is true, allowing users to enter text 
@@ -253,6 +261,7 @@ class _SearchBottomSheetState extends State<SearchBottomSheet> {
             location = place;
             setState(() {
               isSearch = false; // hide search interface
+              widget.onDataReceived(location);        
             });
             toggleSearch();
           },
@@ -264,6 +273,7 @@ class _SearchBottomSheetState extends State<SearchBottomSheet> {
         location = place;
         setState(() {
           isSearch = false; // hide search interface
+          widget.onDataReceived(location);
         });
         toggleSearch();
       },

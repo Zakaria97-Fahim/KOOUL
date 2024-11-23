@@ -5,16 +5,46 @@ import 'package:project_name/widgets/iconWidget.dart';
 import 'language/RTLText.dart';
 
 class Home extends StatefulWidget {  
+    
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
   
-  String? selectedSite;
+  String? selectedSite ;
+
+  // get the Delivery Addresses
+  String? deliveryAddress;
+  String? idMarker;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    
+    // Safely retrieve arguments
+    final args = ModalRoute.of(context)?.settings.arguments;
+
+    if (args != null) {
+      setState(() {
+        if (args is Map<String, String>) {
+          // Handle the case when arguments are a Map
+          deliveryAddress = args['address'];
+          idMarker = args['id'];
+        } else if (args is String) {
+          // Handle the case when a single String is passed
+          deliveryAddress = args;
+        }
+      });
+    }
+  }
+
+  // used for search TextField
   TextEditingController searchText = TextEditingController();
+
   // user local address 
-  String address = 'App 21, Imm 265, Bd Zerktouni...';
+  // String address = 'App 21, Imm 265, Bd Zerktouni...';
+  
   // List of names and images Food 
   final List<Map<String, String>> items = [
     {"image": "assets/images/artBoard/Artboard1.png", "text": "لوريم"},
@@ -25,24 +55,28 @@ class _HomeState extends State<Home> {
     {"image": "assets/images/artBoard/Artboard6.png", "text": "لوريم"},
     {"image": "assets/images/artBoard/Artboard7.png", "text": "لوريم"},
   ];
+
   // List of Card Images
   final List<String> cards = [
     "assets/images/stapleFood/card1.jpg",
     "assets/images/stapleFood/card2.png",
     "assets/images/stapleFood/card3.png",
   ];
+  
   // List of Row Images
   final List<String> imgs = [
     "assets/images/BurgerKing.png",
     "assets/images/Rectangle1.png",
     "assets/images/Rectangle2.png",
   ];
+  
   // List of Food Name 
   final List<String> foodName =[
     'برغر كينغ ',
     'برغر كينغ ',
     'برغر كينغ ',
   ];
+  
   // List of Local Place
   final List<String> localPlace = [
     'معارف',
@@ -70,8 +104,8 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(height: 50),
-                        // AppBar Content with Dropdown for location and shopping cart button
-                        _appBarContent(address),
+                        // Row Content with Dropdown for location and shopping cart button
+                        _appBarContent(deliveryAddress!),
                         SizedBox(height: 20),
                         // Search 
                         _searchBar(searchText, () {}),
@@ -108,8 +142,8 @@ class _HomeState extends State<Home> {
                       child: _storeCard(cards[i], imgs[i], '${localPlace[i]} ${foodName[i]}', '4.5', '600 m'),
                       onTap: () {
                         Navigator.of(context)
-                          .pushReplacementNamed('storeProducts', 
-                          arguments: {'backImage': cards[i], 'logo': imgs[i], 'foodN': foodName[i], 'address': address});
+                          .pushNamed('storeProducts', 
+                          arguments: {'backImage': cards[i], 'logo': imgs[i], 'foodN': foodName[i], 'address': deliveryAddress});
                       }
                     );  
                   },
@@ -137,26 +171,45 @@ class _HomeState extends State<Home> {
               dropdownColor: Color.fromRGBO(51, 51, 77, 1),
               hint: const Text("حدد موقعا", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white)),
               value: selectedSite,
-              onChanged: (site) => setState(() => selectedSite = site),
+              onChanged: (site) => selectedSite = site! ,
               items: [
                 DropdownMenuItem(
                   value: 'home',
                   child: addressRow(
                     Icons.house_rounded,
                     Colors.white,
-                    address,
+                    idMarker == 'House' ? address : 'Empty Address',
                     Colors.white
                   ),
                 ),
                 DropdownMenuItem(
-                  value: 'home2',
+                  value: 'work',
                   child: addressRow(
-                    Icons.house_rounded,
+                    Icons.work,
                     Colors.white,
-                    address,
+                    idMarker == 'Job' ? address : 'Empty Address',
                     Colors.white
                   ),
                 ),
+                DropdownMenuItem(
+                  value: 'lorem',
+                  child: addressRow(
+                    Icons.apartment,
+                    Colors.white,
+                    idMarker == 'lorem' ? address : 'Empty Address',
+                    Colors.white
+                  ),
+                ),
+                DropdownMenuItem(
+                  value: 'new',
+                  child: addressRow(
+                    Icons.apartment,
+                    Colors.white,
+                    idMarker == 'new' ? address : 'Empty Address',
+                    Colors.white
+                  ),
+                ),
+
               ],
             ),
           ],

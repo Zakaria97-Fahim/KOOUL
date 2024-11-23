@@ -3,11 +3,11 @@ import 'package:project_name/widgets/buttonWithIcon.dart';
 import 'package:project_name/widgets/iconButton.dart';
 import 'package:project_name/widgets/iconContainer.dart';
 import 'package:project_name/widgets/listTileAdresse.dart';
-import 'themes/theme.dart';  
-import 'language/RTLText.dart';  
-import 'widgets/customButton.dart';
-import 'widgets/iconWidget.dart';
-import 'widgets/customTextField.dart';
+import '../themes/theme.dart';  
+import '../language/RTLText.dart';  
+import '../widgets/customButton.dart';
+import '../widgets/iconWidget.dart';
+import '../widgets/customTextField.dart';
 
 class AddressDetails extends StatefulWidget {
   const AddressDetails({super.key});
@@ -122,11 +122,11 @@ class _AddressDetailsState extends State<AddressDetails> {
               const SizedBox(height: 100.0),
               // Entry button
               CustomButton(
-                label:"دخول", 
+                label:"دخول",
                 onPressed: (){
                   // open the mapWidget and Pass the address and building number as arguments
-                  Navigator.of(context)
-                    .pushNamed('mapPage',  arguments: '${_fullAdress.text} ${_buildNbr.text} ${_fullAdress.text}');
+                  Navigator.of(context).pushNamed('mapPage', arguments: "Address");
+                  /*${_doorNbr.text} ${_buildNbr.text} ${_fullAdress.text}*/
                 },
                 backColor: AppThemes.lightTheme.primaryColor, // Red Color
                 textColor: AppThemes.lightTheme.scaffoldBackgroundColor, // White Color

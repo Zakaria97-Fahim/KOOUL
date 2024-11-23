@@ -56,7 +56,7 @@ class _StoreProductsState extends State<StoreProducts> {
           child: Column(
             children: [
               // Image and Logo
-              _navBar(backImage, logo, context),
+              _navBar(backImage, logo, context, address),
               SizedBox(height: 40,),
               // Card content : Food Name and user Address
               _cardTitle(foodN, address),
@@ -82,7 +82,7 @@ class _StoreProductsState extends State<StoreProducts> {
                   itemBuilder: (context, i) {
                     return GestureDetector(
                       child: _foodCard(infos[0]['image']!, infos[0]['name']!,infos[0]['info']! ,infos[0]['price']!),
-                      onTap: () {Navigator.of(context).pushReplacementNamed('home');}
+                      onTap: () {}
                     );  
                   },
                 ),
@@ -166,7 +166,7 @@ class _StoreProductsState extends State<StoreProducts> {
   }
 }  
 // Image Food and Logo
-Widget _navBar(String backImage, String logo, context){
+Widget _navBar(String backImage, String logo, context, String address){
   return Stack(
     clipBehavior: Clip.none,
     children: [
@@ -178,7 +178,7 @@ Widget _navBar(String backImage, String logo, context){
         child: IconContainer(
           iconButtonWidget: IconButtonWidget(
             iconWidget: IconWidget(iconData: Icons.arrow_back, size: 25), 
-            onpressed: (){Navigator.pushReplacementNamed(context, 'home');}),
+            onpressed: (){Navigator.pushReplacementNamed(context, 'home', arguments: address);}),
         )
       ),
       Positioned(

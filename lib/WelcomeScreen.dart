@@ -116,7 +116,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>{
                   CustomButton(
                     label: "Google دخول بحساب", 
                     onPressed: (){
-                      Navigator.of(context).pushNamed("login");
+                      Navigator.of(context).pushNamed("add");
                     }, 
                     backColor: AppThemes.lightTheme.scaffoldBackgroundColor,
                   ),  
