@@ -73,8 +73,8 @@ class _HomeState extends State<Home> {
   // List of Food Name 
   final List<String> foodName =[
     'برغر كينغ ',
-    'برغر كينغ ',
-    'برغر كينغ ',
+    'ماكدونالدز ',
+    'طاكوس دو ليون ',
   ];
   
   // List of Local Place
@@ -139,7 +139,7 @@ class _HomeState extends State<Home> {
                   itemCount: cards.length,
                   itemBuilder: (context, i) {
                     return GestureDetector(
-                      child: _storeCard(cards[i], imgs[i], '${localPlace[i]} ${foodName[i]}', '4.5', '600 m'),
+                      child: _storeCard(cards[i], imgs[i], '${foodName[i]} ${localPlace[i]}', '4.5', '600 m'),
                       onTap: () {
                         Navigator.of(context)
                           .pushNamed('storeProducts', 
@@ -248,7 +248,6 @@ Widget _searchBar(TextEditingController searchText, VoidCallback onPressed) {
   return TextField(
     controller: searchText,
     decoration: InputDecoration(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10), // Inner padding
       filled: true,
       fillColor: const Color.fromRGBO(69, 69, 104, 1), // Background Color
       hintText: 'البحث',
@@ -257,7 +256,10 @@ Widget _searchBar(TextEditingController searchText, VoidCallback onPressed) {
         iconData: Icons.search_outlined,
         color: Color.fromRGBO(255, 255, 255, 1),
       ),
-      suffixIcon: _sliderIcon(onPressed),
+      suffixIcon: Container(
+        margin: EdgeInsets.all(8),
+        child: _sliderIcon(onPressed) // Sliders Icon Button
+      ),   //,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(40),
         borderSide: BorderSide(color:const Color.fromRGBO(69, 69, 104, 1),)
@@ -352,13 +354,14 @@ Widget _storeCard(String img, String img2, String foodName, String rates, String
           ),
           // Service Info
           Positioned(
-            right: 10, bottom: 0,
+            right: 10, bottom: 10,
             child: Container(
-              height: 52, width: 298, 
+              height: 52, width: 298,
               child: Row(
                 children: [
                   // Image
                   Image.asset(img2, width: 48, height: 48, fit: BoxFit.fill),
+                  SizedBox(width: 8,),
                   // Service Info
                   Column(
                     children: [
@@ -367,12 +370,14 @@ Widget _storeCard(String img, String img2, String foodName, String rates, String
                         children: [
                           // Food Name
                           Text(foodName, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color.fromRGBO(255, 255, 255, 1))),
+                          SizedBox(width: 4,),
                           // Rates
                           iconTextContainer1(
                            Color.fromRGBO(255, 181, 0, 1),    // backgroundColor
                             Icons.star,                         // iconData
                             rates,                              // text
                           ),
+                          SizedBox(width: 4,),
                           // Place Distance
                           iconTextContainer1(
                            Color.fromRGBO(51, 51, 77, 1),     // backgroundColor
@@ -383,12 +388,13 @@ Widget _storeCard(String img, String img2, String foodName, String rates, String
                       ),
                       // Food Type
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           // fast food
                           textContainer('الطعام السريع'),
+                          SizedBox(width: 4,),
                           //
                           textContainer('وجبات خفيفة'),
+                          SizedBox(width: 4,),
                           // fast food
                           textContainer('الطعام السريع'),
                         ],

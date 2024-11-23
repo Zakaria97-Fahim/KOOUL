@@ -17,12 +17,19 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/Logomark.png"
+  android_background_color: "#FF0000" # Red background
 
 flutter:
   uses-material-design: true
   assets:
     - assets/images/Logomark1.png  
-    - assets/images/salad1.png  
+    - assets/images/salad1.png
     - assets/images/pizza-slice1.png  
     - assets/images/ice-cream1.png  
     - assets/images/hotdog1.png  
@@ -84,3 +91,4 @@ flutter:
     - family: Quicksand-VariableFont_wght
       fonts:        
         - asset: assets/fonts/Quicksand-VariableFont_wght.ttf
+

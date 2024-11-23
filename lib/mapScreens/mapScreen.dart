@@ -88,7 +88,7 @@ class _MapScreenState extends State<MapScreen> {
     final Marker? centerMarker = _markers.firstWhere(
       (marker) => marker.markerId == MarkerId('centerMarker')                    
     );
-    if (centerMarker != null ){ //&& lineBelowMarker != null) {
+    if (centerMarker != null ){
       setState(() {
         _markers.remove(centerMarker); // Remove the old marker
         _currentZoom();
