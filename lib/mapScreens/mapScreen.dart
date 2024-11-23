@@ -244,6 +244,8 @@ class _MapScreenState extends State<MapScreen> {
                 _controller.complete(controller);
             },
             markers: _markers,
+            myLocationEnabled: true, // Shows the blue dot
+            myLocationButtonEnabled: true,
             //polylines: _polylines,
             onCameraMove: (CameraPosition position) {
               setState(() {
