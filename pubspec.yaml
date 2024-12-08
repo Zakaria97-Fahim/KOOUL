@@ -22,7 +22,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/Logomark.png"
+  image_path: "assets/images/Logomark1.png"
   android_background_color: "#FF0000" # Red background
 
 flutter:
