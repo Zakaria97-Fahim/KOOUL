@@ -5,7 +5,6 @@ import 'package:project_name/widgets/iconWidget.dart';
 import 'language/RTLText.dart';
 
 class Home extends StatefulWidget {  
-    
   @override
   _HomeState createState() => _HomeState();
 }
@@ -97,9 +96,9 @@ class _HomeState extends State<Home> {
                 children: [
                   // NavBar
                   Container(
-                    height: 244,
+                    height: 254,
                     color: Color.fromRGBO(51, 51, 77, 1),
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -115,7 +114,7 @@ class _HomeState extends State<Home> {
                   ),
                   // Ads-Container
                   Positioned(
-                    top: 208, left: 0, right: 0,
+                    top: 218, left: 0, right: 0,
                     child: Center( child: _adsContainer() ),
                   ),
                 ],
