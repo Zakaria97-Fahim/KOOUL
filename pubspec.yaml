@@ -91,4 +91,3 @@ flutter:
     - family: Quicksand-VariableFont_wght
       fonts:        
         - asset: assets/fonts/Quicksand-VariableFont_wght.ttf
-
